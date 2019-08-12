@@ -17,6 +17,7 @@ body {
 
 .leftWrapper {
     width: 40%;
+    max-width: 410px;
     float: left;
     height: -webkit-fill-available;
     overflow-y: overlay;
@@ -931,6 +932,10 @@ background-color: #FF4563;
     width: 27%;
   }
 
+  .panelTitle {
+    width: calc(100% - 20px);
+  }
+
   .pdtListDetail.active .pdtDetail {
     display: none;
   }
@@ -979,5 +984,9 @@ background-color: #FF4563;
 
   .deviceSkus {
     margin-left: 3px;
+  }
+
+  .scrollerWrap {
+    margin-left: 0px;
   }
 }
