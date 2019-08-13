@@ -46,7 +46,7 @@ class App extends Component {
                 <PdtList this={this} />
             </div>
             <div class="rightWrapper">
-                {this.state.selectedPdt ? <PdtDetails this={this} /> : ""}
+                {this.state.selectedPdt ? <PdtDetails this={this} identifier={this.state.selectedPdt} /> : ""}
             </div>
         </div>
     );
@@ -73,6 +73,9 @@ class PdtList extends Component {
         let pdtTitle = target.getElementsByClassName('pdtTitle')[0];
         pdtTitle = pdtTitle ? pdtTitle.textContent : "";
         this.props.this.setState({selectedPdt : target.getAttribute('identifier'), productTitle : pdtTitle});
+        var preSku= document.querySelector('.skuClrCont.active input');
+        if(preSku)
+            preSku.click();
         target.scrollIntoView();
     }
   }
@@ -82,6 +85,7 @@ class PdtList extends Component {
     document.getElementById('rightPanel').style.display = "none";
     document.getElementById('backBtn').style.display = "none";
     document.getElementsByClassName('pdtListDetail active')[0].classList.remove('active');
+    // this.setState({selectedPdt:null});
   }
 
   constructPdtList = (data) => {
@@ -138,10 +142,11 @@ class PdtList extends Component {
 }
 
 class PdtDetails extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = { value: 20, min:25, max: 75 };
-    // }
+    constructor(props) {
+        super(props);
+        // this.state = { value: 20, min:25, max: 75 };
+        this.state = {selectedSKU : ""}
+    }
 
     // handleChange = value => {
     //     console.log(`Changed value ${value}`);
@@ -189,9 +194,10 @@ class PdtDetails extends Component {
                 if(ele)
                     ele.classList.remove('disabled');
             });
+            this.setState({selectedSKU:parentEle.parentElement.getAttribute('skuclr')})
         } else {
-            
             prevSku.classList.remove('active');
+            this.setState({selectedSKU:""})
         }
     }
 
@@ -210,23 +216,6 @@ class PdtDetails extends Component {
         }
         document.getElementById('volume').textContent = 0;
     }
-    
-    selectMode = (e) => {
-        let curEle = e.currentTarget;
-        if(!curEle.classList.contains('active')){
-            let prevEle = document.getElementsByClassName('modes active')[0];
-            prevEle ? prevEle.classList.remove('active') : '';
-            curEle.classList.add('active');
-            let demoEle =  document.getElementsByClassName('quickDemoCont')[0];
-            let volume = curEle.getElementsByClassName('modeVolume')[0].textContent.trim();
-            let diskMov = volume.split('%').join('');
-            let degree = (50 > diskMov) ? (360 - 25) : ((50 == diskMov) ? 360 : (360 + 78));
-            demoEle.scrollIntoView();
-            document.getElementById("swipeBall").style.transform = 'rotate(' + degree + 'deg)';
-            document.querySelector(".scrollerWrap .leftScroller").style.width = volume;
-            document.getElementById('volume').textContent = diskMov;
-        }
-    }
 
     constructSkus = (id) => {
         let pdtSkus = productSKUs.length ? productSKUs : [];
@@ -236,7 +225,7 @@ class PdtDetails extends Component {
             let skus = curEle.skus;
             var skuCont = skus.map(data => {
                 return (
-                    <div class="skuClrCont">
+                    <div class="skuClrCont" skuclr={data.color}>
                         <label class="colorSku">
                         <input type="checkbox" onClick={this.skuClick} />
                         <span class="selected" style={{backgroundColor: data.color}}></span>
@@ -286,38 +275,7 @@ class PdtDetails extends Component {
                                 <span class="deviceSkuTitle">Mode</span>
                                 <div class="titleBorder"></div>
                             </div>
-                            <div class="modeList">
-                                <div class="modes mornMode" onClick={this.selectMode}>
-                                    <div class="modeDetail">
-                                        <div class="modeImg" id="mornModeImg"></div>
-                                        <span class="modeTitle">Morning</span>
-                                    </div>
-                                    <div class="modeDetail">
-                                        <div class="modeVolume modeTitle">50%</div>
-                                        <div class="modeAvail modeImg"></div>
-                                    </div>
-                                </div>
-                                <div class="modes dayMode" onClick={this.selectMode}>
-                                    <div class="modeDetail">
-                                        <div class="modeImg" id="dayModeImg"></div>
-                                        <span class="modeTitle">Day</span>
-                                    </div>
-                                    <div class="modeDetail">
-                                        <div class="modeVolume modeTitle">30%</div>
-                                        <div class="modeAvail modeImg"></div>
-                                    </div>
-                                </div>
-                                <div class="modes nightMode" onClick={this.selectMode}>
-                                    <div class="modeDetail">
-                                        <div class="modeImg" id="nightModeImg"></div>
-                                        <span class="modeTitle">Night</span>
-                                    </div>
-                                    <div class="modeDetail">
-                                        <div class="modeVolume modeTitle">100%</div>
-                                        <div class="modeAvail modeImg"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            {this.state.selectedSKU ? <SkuFeatures this={this} /> : ""}
                         </div>
                         <div class="quickDemoCont disabled">
                             <div class="skuTitle">
@@ -342,6 +300,66 @@ class PdtDetails extends Component {
                         {/* <CircleSlider value={value} min={min} max={max} onChange={this.handleChange} /> */}
                     </div>
                 </div>
+            </div>
+        )
+    }
+}
+
+class SkuFeatures extends Component {
+
+    selectMode = (e) => {
+        let curEle = e.currentTarget;
+        if(!curEle.classList.contains('active')){
+            let prevEle = document.getElementsByClassName('modes active')[0];
+            prevEle ? prevEle.classList.remove('active') : '';
+            curEle.classList.add('active');
+            let demoEle =  document.getElementsByClassName('quickDemoCont')[0];
+            let volume = curEle.getElementsByClassName('modeVolume')[0].textContent.trim();
+            let diskMov = volume.split('%').join('');
+            let halfLength = 154/100;
+            let startFrom = 283;
+            let degree = (diskMov >= 0 && diskMov <= 100) ? startFrom + Math.round(halfLength * diskMov) : startFrom;
+            // let degree = (50 > diskMov) ? (360 - 25) : ((50 == diskMov) ? 360 : (360 + 78));
+            demoEle.scrollIntoView();
+            document.getElementById("swipeBall").style.transform = 'rotate(' + degree + 'deg)';
+            document.querySelector(".scrollerWrap .leftScroller").style.width = volume;
+            document.getElementById('volume').textContent = diskMov;
+        }
+    }
+
+    constructModes = (skus,curSku,curThis) => {
+        let curEle = skus.filter(ele => ele.identifier == curThis.props.this.state.selectedPdt).pop();
+        if(curSku) {
+            var data = curEle.skus.filter( clr => clr.color == curSku).pop();
+            data = data.mode ? data.mode : [];
+            var modeDom = data.map(ele => {
+                return (
+                    <div class="modes mornMode" onClick={this.selectMode}>
+                        <div class="modeDetail">
+                            <div class="modeImg" id={ele.label}></div>
+                            <span class="modeTitle">{ele.label}</span>
+                        </div>
+                        <div class="modeDetail">
+                            <div class="modeVolume modeTitle">{ele.value}</div>
+                            <div class="modeAvail modeImg"></div>
+                        </div>
+                    </div>
+                )
+            });
+            return modeDom;
+        } else {
+            return ("");
+        }
+    }
+
+    render() {
+        let curThis = this.props.this;
+        let data = curThis.props.this.state.productSKUs
+        let curSku = curThis.state.selectedSKU;
+        const modeDom = this.constructModes(data,curSku,curThis);
+        return (
+            <div class="modeList" selpdt={this.props.this.props.this.state.selectedPdt}>
+                {modeDom}
             </div>
         )
     }
