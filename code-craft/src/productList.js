@@ -1,6 +1,12 @@
 export const productList = {
 products:[
 	{
+		identifier: "100010",
+		name: "Thermostat",
+		image: "./img/thermostat.png",
+		type: {"label":"In","value":"Bedroom"}
+	},
+	{
 		identifier: "100002",
 		name: "Bed lamp",
 		image: "./img/lamp.png",
@@ -25,7 +31,7 @@ products:[
 		type: {"label":"In","value":"Living room"}
 	},
 	{
-		identifier: "100008",
+		identifier: "",
 		name: "Sony TV",
 		image: "./img/tv.png"
 	},
@@ -49,15 +55,15 @@ export const productSKUs = [
 		skus:[
 			{color:"#FF4563",
 			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
+				{label:"morning",value:"20%"},
+				{label:"day",value:"50%"},
+				{label:"night",value:"80%"}
 			]
 			},
 			{color:"#8245E6",
 			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
+				{label:"morning",value:"25%"},
+				{label:"day",value:"70%"},
 				{label:"night",value:"100%"}
 			]
 			},
@@ -70,16 +76,16 @@ export const productSKUs = [
 			},
 			{color:"#1089EB",
 			mode:[
-				{label:"morning",value:"50%"},
+				{label:"morning",value:"10%"},
 				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
+				{label:"night",value:"45%"}
 			]
 			},
 			{color:"#C791CD",
 			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
+				{label:"morning",value:"65%"},
+				{label:"day",value:"38%"},
+				{label:"night",value:"90%"}
 			]
 			}
 		]
@@ -87,28 +93,14 @@ export const productSKUs = [
 	{
 		identifier: "100003",
 		skus:[
-			{color:"#FF4563",
-			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
-			]
-			},
 			{color:"#8245E6",
 			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
+				{label:"morning",value:"29%"},
+				{label:"day",value:"35%"},
+				{label:"night",value:"42%"}
 			]
 			},
-			{color:"#4AC0E0",
-			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
-			]
-			},
-			{color:"#1089EB",
+			{color:"#FF4563",
 			mode:[
 				{label:"morning",value:"50%"},
 				{label:"day",value:"30%"},
@@ -117,8 +109,22 @@ export const productSKUs = [
 			},
 			{color:"#C791CD",
 			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
+				{label:"morning",value:"5%"},
+				{label:"day",value:"60%"},
+				{label:"night",value:"100%"}
+			]
+			},
+			{color:"#4AC0E0",
+			mode:[
+				{label:"morning",value:"58%"},
+				{label:"day",value:"85%"},
+				{label:"night",value:"98%"}
+			]
+			},
+			{color:"#1089EB",
+			mode:[
+				{label:"morning",value:"80%"},
+				{label:"day",value:"90%"},
 				{label:"night",value:"100%"}
 			]
 			}
@@ -127,30 +133,30 @@ export const productSKUs = [
 	{
 		identifier: "100004",
 		skus:[
-			{color:"#FF4563",
+			{color:"#4AC0E0",
 			mode:[
 				{label:"morning",value:"50%"},
 				{label:"day",value:"30%"},
 				{label:"night",value:"100%"}
 			]
 			},
+			{color:"#FF4563",
+			mode:[
+				{label:"morning",value:"58%"},
+				{label:"day",value:"85%"},
+				{label:"night",value:"98%"}
+			]},
 			{color:"#8245E6",
 			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
-			]},
-			{color:"#4AC0E0",
-			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
+				{label:"morning",value:"29%"},
+				{label:"day",value:"35%"},
+				{label:"night",value:"42%"}
 			]},
 			{color:"#1089EB",
 			mode:[
-				{label:"morning",value:"50%"},
+				{label:"morning",value:"10%"},
 				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
+				{label:"night",value:"45%"}
 			]},
 			{color:"#C791CD",
 			mode:[
@@ -163,22 +169,10 @@ export const productSKUs = [
 	{
 		identifier: "100007",
 		skus:[
-			{color:"#FF4563",
+			{color:"#C791CD",
 			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
-			]},
-			{color:"#8245E6",
-			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
-			]},
-			{color:"#4AC0E0",
-			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
+				{label:"morning",value:"5%"},
+				{label:"day",value:"60%"},
 				{label:"night",value:"100%"}
 			]},
 			{color:"#1089EB",
@@ -187,11 +181,23 @@ export const productSKUs = [
 				{label:"day",value:"30%"},
 				{label:"night",value:"100%"}
 			]},
-			{color:"#C791CD",
+			{color:"#4AC0E0",
 			mode:[
-				{label:"morning",value:"50%"},
+				{label:"morning",value:"29%"},
+				{label:"day",value:"35%"},
+				{label:"night",value:"42%"}
+			]},
+			{color:"#8245E6",
+			mode:[
+				{label:"morning",value:"10%"},
 				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
+				{label:"night",value:"45%"}
+			]},
+			{color:"#FF4563",
+			mode:[
+				{label:"morning",value:"36%"},
+				{label:"day",value:"63%"},
+				{label:"night",value:"88%"}
 			]}
 		]
 	},
@@ -268,31 +274,32 @@ export const productSKUs = [
 	{
 		identifier: "100010",
 		skus:[
-			{color:"#8245E6",
+			{color:"#1089EB",
 			mode:[
 				{label:"morning",value:"50%"},
 				{label:"day",value:"30%"},
 				{label:"night",value:"100%"}
+			]
+			},
+			{color:"#C791CD",
+			mode:[
+				{label:"morning",value:"58%"},
+				{label:"day",value:"85%"},
+				{label:"night",value:"98%"}
 			]},
 			{color:"#4AC0E0",
 			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
-			]},
-			{color:"#C791CD",
-			mode:[
-				{label:"morning",value:"50%"},
-				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
+				{label:"morning",value:"29%"},
+				{label:"day",value:"35%"},
+				{label:"night",value:"42%"}
 			]},
 			{color:"#FF4563",
 			mode:[
-				{label:"morning",value:"50%"},
+				{label:"morning",value:"10%"},
 				{label:"day",value:"30%"},
-				{label:"night",value:"100%"}
+				{label:"night",value:"45%"}
 			]},
-			{color:"#1089EB",
+			{color:"#8245E6",
 			mode:[
 				{label:"morning",value:"50%"},
 				{label:"day",value:"30%"},
