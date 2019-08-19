@@ -323,6 +323,7 @@ input:checked + .toggleDot:before {
 
 #deviceDetWrap {
   display: none;
+  width: 100%;
 }
 
 #deviceDetWrap.show {
